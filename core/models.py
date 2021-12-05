@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -43,7 +44,7 @@ class Potato(PriceMixin):
     COUNTRY_BEL = "bel", "Беларусь"
     country_choices = [(COUNTRY_BEL[0], COUNTRY_BEL[1]), ]
 
-    id = models.UUIDField(primary_key=True)
+    id = models.CharField(max_length=128, primary_key=True)
     country = models.CharField(max_length=128, choices=country_choices)
 
     purchases = GenericRelation("Purchase", related_query_name="potato", related_name="potatoes")
@@ -57,7 +58,7 @@ class Purchase(models.Model):
         Объект описывающий сущность покуаки чего либо.
     """
     created_at = models.DateTimeField(auto_now_add=True)
-    count = models.PositiveIntegerField()
+    count = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10000)])
     order = models.ForeignKey("Order", on_delete=models.CASCADE, related_name="purchases")
 
     # Согласно документации, создаём поля для хранения ContentType и object_id
@@ -72,6 +73,14 @@ class Purchase(models.Model):
         # кстати тут у нас явный пример полиморфизма, у всех продуктов будет вызван метод __str__, но вернётся разный
         # результат для каждого продукта
         return f"purchase_id: {self.id}, product: {self.product}"
+
+    @property
+    def cost(self):
+        """
+            Возсращает стоимость покупки
+        :return: float
+        """
+        return self.count * self.product.price
 
 
 class Order(models.Model):

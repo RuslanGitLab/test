@@ -1,4 +1,3 @@
-import uuid
 
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
@@ -22,8 +21,8 @@ class PurchasesTest(TestCase):
         ct_pan, ct_potato = ContentType.objects.get_for_model(Pan), ContentType.objects.get_for_model(Potato)
 
         # Создадим две покупки, 3 кг картошки, 1 сковороды
-        Purchase.objects.create(count=3, content_type=ct_potato, object_id=potato.id, order=order)
-        Purchase.objects.create(count=1, content_type=ct_pan, object_id=pan.id, order=order)
+        p1 = Purchase.objects.create(count=3, content_type=ct_potato, object_id=potato.id, order=order)
+        p2 = Purchase.objects.create(count=1, content_type=ct_pan, object_id=pan.id, order=order)
 
         # Првоерим что покупки привязались к заказу
         self.assertEqual(order.purchases.count(), 2)
@@ -36,6 +35,9 @@ class PurchasesTest(TestCase):
         print(order.purchases.all())
 
         # Или даже все сковороды в заказе от заданного производителя
-        print(order.purchases.filter(pan__vendor="tefal"))
+        print(order.purchases.filter(pan__vendor=Pan.VENDOR_TEFAL[0]))
+        # Или весь беларусский картофель в заказе
+        print(order.purchases.filter(potato__country=Potato.COUNTRY_BEL[0]))
+
         # <QuerySet [<Purchase: purchase_id: 1, CT: core | potato, object_id: b5a32d62-5535-11ec-a799-049226578ae5>,
         #            <Purchase: purchase_id: 2, CT: core | pan, object_id: 1>]>
