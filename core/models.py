@@ -47,7 +47,7 @@ class Potato(PriceMixin):
     id = models.CharField(max_length=128, primary_key=True)
     country = models.CharField(max_length=128, choices=country_choices)
 
-    purchases = GenericRelation("Purchase", related_query_name="potato", related_name="potatoes")
+    purchases = GenericRelation("Purchase", related_query_name="potato")
 
     def __str__(self):
         return f"Картофель из страны: {self.get_country_display()}"
