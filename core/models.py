@@ -25,6 +25,7 @@ class Pan(PriceMixin):
         Модель описывающая таблицу с товаром типа: Сковорода
     """
     VENDOR_TEFAL = "tefal", "Tefal"
+    VENDOR_FISSMAN = "fissman", "Fissman"
 
     vendor_choices = [(VENDOR_TEFAL[0], VENDOR_TEFAL[1])]
     vendor = models.CharField(max_length=128, choices=vendor_choices)
@@ -42,6 +43,7 @@ class Potato(PriceMixin):
     """
 
     COUNTRY_BEL = "bel", "Беларусь"
+    COUNTRY_RUS = "rus", "Россия"
     country_choices = [(COUNTRY_BEL[0], COUNTRY_BEL[1]), ]
 
     id = models.CharField(max_length=128, primary_key=True)
@@ -58,7 +60,8 @@ class Purchase(models.Model):
         Объект описывающий сущность покуаки чего либо.
     """
     created_at = models.DateTimeField(auto_now_add=True)
-    count = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10000)])
+    count = models.DecimalField(decimal_places=2, max_digits=4,
+                                validators=[MinValueValidator(0.01), MaxValueValidator(10000)])
     order = models.ForeignKey("Order", on_delete=models.CASCADE, related_name="purchases")
 
     # Согласно документации, создаём поля для хранения ContentType и object_id
@@ -87,6 +90,6 @@ class Order(models.Model):
     """
         Модель описывающая заказ, содержит связь с покупками, через related_name="purchases", см core/models.py:52
     """
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name="orders")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
