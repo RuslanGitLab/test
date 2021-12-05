@@ -10,9 +10,10 @@ class PurchasesTest(TestCase):
     POTATO_UUID2 = "b5a32d62-5535-11ec-a799-049226578ae6"
 
     def test_order_creation(self):
-        # Создаём покупателя, сковороду и белорусскую картошку :)
+        # Создаём покупателей, сковороду и белорусскую картошку :)
         buyer_alex = Buyer.objects.create(id=1, username="Alex")
         buyer_boris = Buyer.objects.create(id=2, username="Boris")
+
         pan_tefal = Pan.objects.create(id=1, vendor=Pan.VENDOR_TEFAL[0], diameter=30, price=1500)
         pan_fissman = Pan.objects.create(id=2, vendor=Pan.VENDOR_FISSMAN[0], diameter=35, price=1700)
         potato_bel = Potato.objects.create(id=self.POTATO_UUID, country=Potato.COUNTRY_BEL[0], price=45.5)
@@ -53,3 +54,7 @@ class PurchasesTest(TestCase):
         print(order_alex.purchases.filter(pan__vendor=Pan.VENDOR_TEFAL[0]))
         # Или весь беларусский картофель в заказе
         print(order_alex.purchases.filter(potato__country=Potato.COUNTRY_BEL[0]))
+
+        # наглядно можно увидеть, что продукты действительно разного типа
+        for p in order_alex.purchases.all():
+            print(p.product)
