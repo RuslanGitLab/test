@@ -1,7 +1,9 @@
-
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from core.models import Pan, Buyer, Purchase, Potato, Order
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 # python manage.py test core.tests.test_purchases
@@ -39,22 +41,23 @@ class PurchasesTest(TestCase):
         self.assertEqual(order_alex.purchases.count(), 3)
 
         # Теперь мы можем вывести все покупки товара картофель или сковрода
-        print(potato_rus.purchases.all())
-        print(potato_bel.purchases.all())
+        logger.info(potato_rus.purchases.all())
+        logger.info(potato_bel.purchases.all())
 
         # Все заказы покупателей
-        print(buyer_alex.orders.all())
-        print(buyer_boris.orders.all())
+        logger.info(buyer_alex.orders.all())
+        logger.info(buyer_boris.orders.all())
 
         # Все покупки заказа
-        print(order_boris.purchases.all())
-        print(order_alex.purchases.all())
+        logger.info(order_boris.purchases.all())
+        logger.info(order_alex.purchases.all())
 
         # Или даже все сковороды в заказе от заданного производителя
-        print(order_alex.purchases.filter(pan__vendor=Pan.VENDOR_TEFAL[0]))
-        # Или весь беларусский картофель в заказе
-        print(order_alex.purchases.filter(potato__country=Potato.COUNTRY_BEL[0]))
+        logger.info(order_alex.purchases.filter(pan__vendor=Pan.VENDOR_TEFAL[0]))
+
+        logger.info("Выведем покупки только белорусского картофеля в заказе Алекса:")
+        logger.info(order_alex.purchases.filter(potato__country=Potato.COUNTRY_BEL[0]))
 
         # наглядно можно увидеть, что продукты действительно разного типа
         for p in order_alex.purchases.all():
-            print(p.product)
+            logger.info(p.product)

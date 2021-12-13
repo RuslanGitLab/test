@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import logging
+
+logging.basicConfig(encoding='utf-8', level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', # NoQa
+                    datefmt='%H:%M:%S',) # NoQa
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
