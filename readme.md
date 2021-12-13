@@ -7,6 +7,7 @@
 
 # Комментарии к видео, запуск и настройка
 ## GenericForeignKey - запуск проекта и тестов
+## Ссылка на видео - https://clck.ru/ZKEVJ
 * Склонируйте проект `git clone https://gitlab.soaqa.ru/Soaqa/youtube_project` и переключитесь на ветку `generic_foreign_key`
 * Создайте python virtual environment `python3.1 -m venv venv`, активируйте его и установите зависимости из `requirements.txt`
 * Выполните миграции `python manage.py migrate` 
