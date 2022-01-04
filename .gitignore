@@ -1,5 +1,5 @@
 # Created by https://www.gitignore.io
-
+*/settings/__init__.py
 ### OSX ###
 .DS_Store
 .AppleDouble
