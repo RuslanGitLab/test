@@ -7,5 +7,5 @@ from django.http import HttpResponse
 def square_of_a(request):
     a = request.GET.get("a")
     if str(a).isdigit():
-        return HttpResponse(content=f"a in square is {int(a) ** 2}")
-    return HttpResponse(content=f"a is not a digit, or not presented")
+        return HttpResponse(content=f"Aaa in square is {int(a) ** 2}")
+    return HttpResponse(content=f"Aaa is not a digit, or not presented")
