@@ -82,11 +82,12 @@ WSGI_APPLICATION = 'soaqaz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'TEST': {
-            'NAME': 'testdb.sqlite3',
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'localhost',
+        'PORT': 54321,
+        'USER': 'soaqa',
+        'PASSWORD': "123123",
+        'NAME': "db01"
     }
 }
 
