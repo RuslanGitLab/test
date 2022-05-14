@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import logging
 
@@ -86,7 +86,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 54321,
         'USER': 'soaqa',
-        'PASSWORD': "123123",
+        'PASSWORD': os.environ['POSTGRES_PASS'],
         'NAME': "db01"
     }
 }
