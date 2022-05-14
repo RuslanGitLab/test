@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "core"
+    "core",
+    "django_celery_results",
+    "django_celery_beat"
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,21 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "core.Buyer"
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:16379/0'
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:16379/1',
+    }
+}
+
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+CSRF_TRUSTED_ORIGINS = ["http://oracle.soaqa.ru"]
