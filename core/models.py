@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -27,7 +29,8 @@ class Pan(PriceMixin):
     VENDOR_TEFAL = "tefal", "Tefal"
     VENDOR_FISSMAN = "fissman", "Fissman"
 
-    vendor_choices = [(VENDOR_TEFAL[0], VENDOR_TEFAL[1])]
+    vendor_choices = [(VENDOR_TEFAL[0], VENDOR_TEFAL[1]),
+                      (VENDOR_FISSMAN[0], VENDOR_FISSMAN[1])]
     vendor = models.CharField(max_length=128, choices=vendor_choices)
     diameter = models.PositiveIntegerField()
 
@@ -44,9 +47,10 @@ class Potato(PriceMixin):
 
     COUNTRY_BEL = "bel", "Беларусь"
     COUNTRY_RUS = "rus", "Россия"
-    country_choices = [(COUNTRY_BEL[0], COUNTRY_BEL[1]), ]
+    country_choices = [(COUNTRY_BEL[0], COUNTRY_BEL[1]),
+                       (COUNTRY_RUS[0], COUNTRY_RUS[1])]
 
-    id = models.CharField(max_length=128, primary_key=True)
+    id = models.CharField(max_length=128, primary_key=True, default=uuid.uuid4())
     country = models.CharField(max_length=128, choices=country_choices)
 
     purchases = GenericRelation("Purchase", related_query_name="potato")
@@ -93,3 +97,6 @@ class Order(models.Model):
     buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name="orders")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Покупатель: {self.buyer.username}, количество товаров в чеке: {self.purchases.count()}"
