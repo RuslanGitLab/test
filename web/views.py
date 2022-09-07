@@ -5,7 +5,7 @@ from core.models import Pan
 from web.forms import PanConfirmDelete
 
 
-class PanFormView(CreateView):
+class PanCreateView(CreateView):
     model = Pan
     fields = ["price", "vendor", "diameter"]
 
