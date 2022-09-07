@@ -8,6 +8,9 @@ from django.db import models
 
 
 # Создадим модель нашего покупателя, просто унаследовав пользователя Django
+from django.urls import reverse
+
+
 class Buyer(AbstractUser):
     ...
 
@@ -39,6 +42,8 @@ class Pan(PriceMixin):
     def __str__(self):
         return f"Сковорода фирмы: {self.get_vendor_display()}, {self.diameter} sm"
 
+    def get_absolute_url(self):
+        return reverse("web:update_pan", args=[self.id])
 
 class Potato(PriceMixin):
     """
