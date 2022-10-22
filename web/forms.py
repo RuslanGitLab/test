@@ -24,3 +24,4 @@ class PanConfirmDelete(forms.Form):
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Buyer
+        fields = UserCreationForm.Meta.fields + ("email", )
