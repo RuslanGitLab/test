@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 import logging
 
+from django.urls import reverse_lazy
+
 logging.basicConfig(encoding='utf-8', level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', # NoQa
                     datefmt='%H:%M:%S',) # NoQa
 
@@ -157,3 +159,5 @@ CELERY_CACHE_BACKEND = 'default'
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
 CSRF_TRUSTED_ORIGINS = ["http://oracle.soaqa.ru"]
+
+LOGIN_REDIRECT_URL = reverse_lazy("web:profile")

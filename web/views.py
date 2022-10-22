@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -19,3 +20,7 @@ class PanDeleteView(DeleteView):
     model = Pan
     success_url = reverse_lazy('web:create_pan')
     form_class = PanConfirmDelete
+
+
+def profile_view(request):
+    return render(request, 'web/profile.html')
