@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
-from core.models import Pan
-from web.forms import PanConfirmDelete
+from core.models import Pan, Buyer
+from web.forms import PanConfirmDelete, RegisterForm
 
 
 class PanCreateView(CreateView):
@@ -26,3 +26,12 @@ class PanDeleteView(DeleteView):
 @login_required
 def profile_view(request):
     return render(request, 'web/profile.html')
+
+
+class RegisterView(FormView):
+    form_class = RegisterForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy("web:profile")
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
