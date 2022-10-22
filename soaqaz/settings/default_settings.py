@@ -161,3 +161,5 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CSRF_TRUSTED_ORIGINS = ["http://oracle.soaqa.ru"]
 
 LOGIN_REDIRECT_URL = reverse_lazy("web:profile")
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None

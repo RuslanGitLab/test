@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -22,5 +23,6 @@ class PanDeleteView(DeleteView):
     form_class = PanConfirmDelete
 
 
+@login_required
 def profile_view(request):
     return render(request, 'web/profile.html')
