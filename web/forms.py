@@ -1,7 +1,9 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
+from django.urls import reverse_lazy
 
-from core.models import Pan
+from core.models import Pan, Buyer
 
 
 class PanForm(forms.ModelForm):
@@ -17,3 +19,9 @@ class PanConfirmDelete(forms.Form):
         if self.cleaned_data["confirm_delete"] is False:
             raise ValidationError("You must confirm this form!")
         return super(PanConfirmDelete, self).clean()
+
+
+class RegisterForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Buyer
+        fields = UserCreationForm.Meta.fields + ("email", )
