@@ -1,15 +1,24 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from django.urls import reverse_lazy
 
 from core.models import Pan, Buyer
 
 
 class PanForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(PanForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Pan
         fields = ["price", "vendor", "diameter"]
+
+    def save(self, commit=True):
+        pan = super(PanForm, self).save(commit=commit)
+        pan.creator = self.request.user
+        pan.save()
+        return pan
 
 
 class PanConfirmDelete(forms.Form):

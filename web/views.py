@@ -1,20 +1,33 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
-from core.models import Pan, Buyer
-from web.forms import PanConfirmDelete, RegisterForm
+from core.models import Pan
+from web.forms import PanConfirmDelete, RegisterForm, PanForm
 
 
-class PanCreateView(CreateView):
+
+class PanCreateView(LoginRequiredMixin, CreateView):
     model = Pan
-    fields = ["price", "vendor", "diameter"]
+    form_class = PanForm
 
+    def get_form_kwargs(self):
+        kwargs = super(PanCreateView, self).get_form_kwargs()
+        kwargs["request"] = self.request
+        return kwargs
+
+    
 class PanUpdateView(UpdateView):
     model = Pan
-    fields = ["price", "vendor"]
+    fields = ["price", "vendor", "creator"]
     template_name_suffix = '_update_form'
+
+    def get_form(self, form_class=None):
+        form = super(PanUpdateView, self).get_form(form_class=None)
+        form.fields["creator"].disabled = True
+        return form
 
 
 class PanDeleteView(DeleteView):

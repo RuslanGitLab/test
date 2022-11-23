@@ -39,6 +39,8 @@ class Pan(PriceMixin):
 
     purchases = GenericRelation("Purchase", related_query_name="pan", related_name="pans")
 
+    creator = models.ForeignKey(Buyer, on_delete=models.SET_NULL, null=True)
+
     def __str__(self):
         return f"Сковорода фирмы: {self.get_vendor_display()}, {self.diameter} sm"
 
