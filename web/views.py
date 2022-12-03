@@ -35,3 +35,7 @@ class RegisterView(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+def index(request):
+    return render(request, 'web/index.html')
