@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PanCreateView, PanUpdateView, PanDeleteView, profile_view, RegisterView, index
+from .views import PanCreateView, PanUpdateView, PanDeleteView, profile_view, RegisterView, index, WebPasswordResetView
 
 app_name = "web"
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('pans/<pk>/delete', PanDeleteView.as_view(), name="delete_pan"),
     path('profile', profile_view, name="profile"),
     path('register', RegisterView.as_view(), name="register"),
+    path("password_reset/", WebPasswordResetView.as_view(), name="password_reset"),
 ]
