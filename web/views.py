@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordResetView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -35,3 +36,11 @@ class RegisterView(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+def index(request):
+    return render(request, 'web/index.html')
+
+
+class WebPasswordResetView(PasswordResetView):
+    template_name = 'web/password_reset_email.html'
