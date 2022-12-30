@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 54321,
         'USER': 'soaqa',
-        'PASSWORD': os.environ['POSTGRES_PASS'],
+        'PASSWORD': os.getenv('POSTGRES_PASS'),
         'NAME': "db01"
     }
 }
