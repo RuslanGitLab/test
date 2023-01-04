@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'soaqaz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'PORT': 54321,
-        'USER': 'soaqa',
-        'PASSWORD': os.getenv('POSTGRES_PASS'),
-        'NAME': "db01"
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', 5432),
+        'USER': os.getenv('POSTGRES_USER', 'soaqa'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'NAME': os.getenv('POSTGRES_DB', "db01")
     }
 }
 
@@ -134,6 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+MEDIA_ROOT = 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
