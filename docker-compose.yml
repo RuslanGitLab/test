@@ -9,6 +9,9 @@ services:
     env_file:
       - .env
   youtube_project:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: yt_django:latest
     container_name: yt_django
     depends_on:
@@ -40,6 +43,7 @@ services:
       - youtube_project
     ports:
       - "${NGINX_EXTERNAL_PORT}:80"
+      - "${NGINX_EXTERNAL_SSL_PORT}:80"
   acme_companion:
     image: nginxproxy/acme-companion
     container_name: app_acme_companion
