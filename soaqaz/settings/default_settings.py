@@ -32,9 +32,6 @@ SECRET_KEY = 'django-insecure--22a3=63py*mv_nfodepzeqqdvsna&eb@m%8y+7i8joha9jnyr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,6 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 STATIC_ROOT = 'static'
 MEDIA_ROOT = 'media'
 
@@ -165,3 +164,5 @@ CSRF_TRUSTED_ORIGINS = ["http://oracle.soaqa.ru"]
 LOGIN_REDIRECT_URL = reverse_lazy("web:profile")
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST"), ]
