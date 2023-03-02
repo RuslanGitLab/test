@@ -51,13 +51,3 @@ class PurchasesTest(TestCase):
         # Все покупки заказа
         logger.info(order_boris.purchases.all())
         logger.info(order_alex.purchases.all())
-
-        # Или даже все сковороды в заказе от заданного производителя
-        logger.info(order_alex.purchases.filter(pan__vendor=Pan.VENDOR_TEFAL[0]))
-
-        logger.info("Выведем покупки только белорусского картофеля в заказе Алекса:")
-        logger.info(order_alex.purchases.filter(potato__country=Potato.COUNTRY_BEL[0]))
-
-        # наглядно можно увидеть, что продукты действительно разного типа
-        for p in order_alex.purchases.all():
-            logger.info(p.product)
