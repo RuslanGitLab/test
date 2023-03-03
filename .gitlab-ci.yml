@@ -1,0 +1,18 @@
+stages:
+  - test
+  - delivery
+
+test-job:
+  stage: test
+  script:
+    - docker compose -f docker/test/docker-compose.yml down
+    - docker compose -f docker/test/docker-compose.yml up  --abort-on-container-exit
+
+delivery-job:
+  stage: delivery
+  only:
+    - main
+  script:
+    - docker login -p $DOCKER_REGISTRY_KEY -u $DOCKER_REGISTRY_USER registry.soaqa.ru
+    - docker tag yt_django:test $CI_REGISTRY_IMAGE
+    - docker push $CI_REGISTRY_IMAGE
