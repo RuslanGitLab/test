@@ -9,10 +9,7 @@ services:
     env_file:
       - .env
   youtube_project:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    image: yt_django:latest
+    image: registry.soaqa.ru/soaqa/youtube_project
     container_name: yt_django
     depends_on:
       - yt_postgres
