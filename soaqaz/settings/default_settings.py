@@ -32,8 +32,7 @@ SECRET_KEY = 'django-insecure--22a3=63py*mv_nfodepzeqqdvsna&eb@m%8y+7i8joha9jnyr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST"), ]
 
 # Application definition
 
@@ -160,8 +159,10 @@ CELERY_CACHE_BACKEND = 'default'
 
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
-CSRF_TRUSTED_ORIGINS = ["http://oracle.soaqa.ru"]
-
 LOGIN_REDIRECT_URL = reverse_lazy("web:profile")
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+CSRF_TRUSTED_ORIGINS = []
+if scrf_subdomain := os.getenv("SCRF_SUBDOMAIN"):
+    CSRF_TRUSTED_ORIGINS += [f'http://{scrf_subdomain}', f'https://{scrf_subdomain}']
