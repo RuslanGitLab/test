@@ -3,14 +3,14 @@ version: "3.9"
 services:
   yt_postgres:
     image: postgres:15
-    container_name: yt_postgres
+    container_name: test_postgres
     env_file:
       - $env
   youtube_project:
     image: yt_django:test
     build:
       context: ../../.
-    container_name: yt_django
+    container_name: test_django
     env_file:
       - $env
     depends_on:
