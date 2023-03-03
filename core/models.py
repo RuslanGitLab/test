@@ -45,6 +45,7 @@ class Pan(PriceMixin):
     def get_absolute_url(self):
         return reverse("web:update_pan", args=[self.id])
 
+
 class Potato(PriceMixin):
     """
         Модель описывающая таблицу с товаром типа: Картофель
