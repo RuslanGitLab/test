@@ -56,7 +56,7 @@ class Potato(PriceMixin):
     country_choices = [(COUNTRY_BEL[0], COUNTRY_BEL[1]),
                        (COUNTRY_RUS[0], COUNTRY_RUS[1])]
 
-    id = models.CharField(max_length=128, primary_key=True, default=uuid.uuid4())
+    id = models.CharField(max_length=128, primary_key=True, default=uuid.uuid4)
     country = models.CharField(max_length=128, choices=country_choices)
 
     purchases = GenericRelation("Purchase", related_query_name="potato")

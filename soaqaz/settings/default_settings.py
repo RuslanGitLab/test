@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     "core",
     "django_celery_results",
     "django_celery_beat",
-    "web"
+    "web",
+    "mptt",
+    "fias",
 ]
 
 MIDDLEWARE = [
