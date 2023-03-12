@@ -8,6 +8,8 @@ services:
       - ~/.pg/pg_data/yt:/var/lib/postgresql/data
     env_file:
       - .env
+    ports:
+      - "127.0.0.1:15432:5432"
   youtube_project:
     image: registry.soaqa.ru/soaqa/youtube_project
     container_name: yt_django
