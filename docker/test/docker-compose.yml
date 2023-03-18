@@ -16,4 +16,4 @@ services:
     depends_on:
       - yt_postgres
     command: >
-      bash -c "sleep 10 && python manage.py test"
+      bash -c "sleep 10 && python manage.py migrate && python manage.py test"
