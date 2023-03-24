@@ -150,7 +150,7 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': 'redis://127.0.0.1:16379/1',
     }
 }
@@ -167,3 +167,6 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 CSRF_TRUSTED_ORIGINS = []
 if scrf_subdomain := os.getenv("SCRF_SUBDOMAIN"):
     CSRF_TRUSTED_ORIGINS += [f'http://{scrf_subdomain}', f'https://{scrf_subdomain}']
+
+SOAQAZ_USER_CONFIRMATION_KEY = "user_confirmation_{token}"
+SOAQAZ_USER_CONFIRMATION_TIMEOUT = 300

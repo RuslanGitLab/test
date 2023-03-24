@@ -57,6 +57,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/.docker/config.json:/config.json
     command: --interval 30 yt_django
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "127.0.0.1:16379:6379"
 
 
 volumes:
