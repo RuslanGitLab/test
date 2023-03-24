@@ -15,8 +15,7 @@ import logging
 
 from django.urls import reverse_lazy
 
-logging.basicConfig(encoding='utf-8', level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', # NoQa
-                    datefmt='%H:%M:%S',) # NoQa
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', datefmt='%H:%M:%S')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
