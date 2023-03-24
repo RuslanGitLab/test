@@ -33,6 +33,7 @@ class RegisterView(FormView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy("web:profile")
+
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)

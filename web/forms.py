@@ -20,7 +20,13 @@ class PanConfirmDelete(forms.Form):
         return super(PanConfirmDelete, self).clean()
 
 
-class RegisterForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
+class RegisterForm(forms.ModelForm):
+    confirmation = forms.BooleanField()
+
+    class Meta:
         model = Buyer
-        fields = UserCreationForm.Meta.fields + ("email", )
+        fields = ("email", )
+
+    def clean_confirmation(self):
+        if self.cleaned_data["confirmation"] is not True:
+            raise ValidationError("You must confirm!")
