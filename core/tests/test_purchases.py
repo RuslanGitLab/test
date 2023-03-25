@@ -13,8 +13,8 @@ class PurchasesTest(TestCase):
 
     def test_order_creation(self):
         # Создаём покупателей, сковороду и белорусскую картошку :)
-        buyer_alex = Buyer.objects.create(id=1, username="Alex")
-        buyer_boris = Buyer.objects.create(id=2, username="Boris")
+        buyer_alex = Buyer.objects.create(id=1, username="Alex", email="email1@bk.ru")
+        buyer_boris = Buyer.objects.create(id=2, username="Boris", email="email2@bk.ru")
 
         pan_tefal = Pan.objects.create(id=1, vendor=Pan.VENDOR_TEFAL[0], diameter=30, price=1500)
         pan_fissman = Pan.objects.create(id=2, vendor=Pan.VENDOR_FISSMAN[0], diameter=35, price=1700)
