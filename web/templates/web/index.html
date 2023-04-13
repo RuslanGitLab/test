@@ -1,4 +1,5 @@
 {%  extends 'web/base.html' %}
+{% load i18n %}
 
 {%  block body %}
 
@@ -6,7 +7,7 @@
         <div class="card-body" style="background-color: #2aabd2; border-color: #1A01CC">
             <div class="row" >
                 <div class="col">
-                    <button onclick="document.location.href='{% url "web:profile" %}'">Profile</button>
+                    <button onclick="document.location.href='{% url "web:profile" %}'">{% translate 'Profile' %}</button>
                 </div>
             </div>
         </div>
