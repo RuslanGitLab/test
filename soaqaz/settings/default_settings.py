@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "web",
     "mptt",
     "fias",
+    "rest_framework",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -188,3 +190,11 @@ EMAIL_HOST_USER = os.environ["MAIL_ADDR"]
 EMAIL_HOST_PASSWORD = os.environ["MAIL_PASS"]
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
