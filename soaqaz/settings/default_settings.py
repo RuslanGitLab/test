@@ -14,7 +14,9 @@ from pathlib import Path
 import logging
 
 from django.urls import reverse_lazy
+from dotenv import load_dotenv
 
+load_dotenv()
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', datefmt='%H:%M:%S')
 
 
@@ -96,7 +98,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', "db01")
     }
 }
-
+print(os.getenv('POSTGRES_PORT', 5432))
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

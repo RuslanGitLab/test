@@ -7,7 +7,7 @@ services:
     volumes:
       - ~/.pg/pg_data/yt:/var/lib/postgresql/data
     env_file:
-      - .env
+      - soaqaz/settings/.env
     ports:
       - "127.0.0.1:15432:5432"
   youtube_project:
@@ -19,7 +19,7 @@ services:
       - static_volume:/yt/static
       - media_volume:/yt/media
     env_file:
-      - .env
+      - soaqaz/settings/.env
     environment:
       - VIRTUAL_HOST=${ALLOWED_HOST}
       - LETSENCRYPT_HOST=${ALLOWED_HOST}
