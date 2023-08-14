@@ -14,6 +14,9 @@ from pathlib import Path
 import logging
 
 from django.urls import reverse_lazy
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', datefmt='%H:%M:%S')
 
