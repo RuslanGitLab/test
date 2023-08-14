@@ -180,3 +180,11 @@ if scrf_subdomain := os.getenv("SCRF_SUBDOMAIN"):
 
 SOAQAZ_USER_CONFIRMATION_KEY = "user_confirmation_{token}"
 SOAQAZ_USER_CONFIRMATION_TIMEOUT = 300
+
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ["MAIL_ADDR"]
+EMAIL_HOST_PASSWORD = os.environ["MAIL_PASS"]
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
