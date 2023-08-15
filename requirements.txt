@@ -38,20 +38,31 @@ django==4.0.4
     #   -r requirements.in
     #   django-celery-beat
     #   django-celery-results
+    #   django-filter
     #   django-js-asset
+    #   django-redis
     #   django-timezone-field
+    #   djangorestframework
 django-celery-beat==2.5.0
     # via -r requirements.in
 django-celery-results==2.5.1
+    # via -r requirements.in
+django-filter==23.2
     # via -r requirements.in
 django-js-asset==2.1.0
     # via django-mptt
 django-mptt==0.14.0
     # via -r requirements.in
+django-redis==5.3.0
+    # via -r requirements.in
 django-timezone-field==5.1
     # via django-celery-beat
+djangorestframework==3.14.0
+    # via -r requirements.in
 kombu==5.3.1
     # via celery
+markdown==3.4.4
+    # via -r requirements.in
 packaging==21.3
     # via redis
 prompt-toolkit==3.0.39
@@ -69,9 +80,13 @@ python-dateutil==2.8.2
 python-dotenv==1.0.0
     # via -r requirements.in
 pytz==2023.3
-    # via django-timezone-field
+    # via
+    #   django-timezone-field
+    #   djangorestframework
 redis==4.3.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-redis
 six==1.16.0
     # via python-dateutil
 sqlparse==0.4.2
