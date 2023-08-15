@@ -17,6 +17,7 @@ from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
+
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s', datefmt='%H:%M:%S')
 
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     "fias",
     "rest_framework",
     "api",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -100,6 +102,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', "db01")
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -184,6 +187,7 @@ if scrf_subdomain := os.getenv("SCRF_SUBDOMAIN"):
 SOAQAZ_USER_CONFIRMATION_KEY = "user_confirmation_{token}"
 SOAQAZ_USER_CONFIRMATION_TIMEOUT = 300
 
+
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.environ["MAIL_ADDR"]
@@ -195,6 +199,11 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+
 }

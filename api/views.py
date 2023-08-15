@@ -1,14 +1,16 @@
 from rest_framework import viewsets
 
-from core.models import Buyer, Pan
+
+# Create your views here.
 from api.serializers import BuyerSerializer, PanSerializer
+from core.models import Buyer, Pan
 
 
 class BuyerViewSet(viewsets.ModelViewSet):
-    queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
+    queryset = Buyer.objects.filter(is_active=True)
 
 
 class PanViewSet(viewsets.ModelViewSet):
-    queryset = Pan.objects.all()
     serializer_class = PanSerializer
+    queryset = Pan.objects.all()
